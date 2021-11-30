@@ -6,6 +6,16 @@ import cpp
 // select c, f
 
 // More compact version with the Function variable implicit
-from FunctionCall c
-where c.getTarget().getName() = "memcpy"
-select c
+//from FunctionCall c
+//where c.getTarget().getName() = "memcpy"
+//select c
+
+//right solution
+
+from FunctionCall call, Function fcn
+where
+  call.getTarget() = fcn and
+//fcn.getDeclaringType().getSimpleName() = "map" and
+//fcn.getDeclaringType().getNamespace().getName() = "std" and
+  fcn.hasName("memcpy")
+select call

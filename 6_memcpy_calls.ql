@@ -1,6 +1,10 @@
 import cpp
 
-from Function f, FunctionCall c
-where c.getTarget() = f and f.getName() = "memcpy"
-select c, f
-
+ 
+from FunctionCall call, Function fcn
+where
+  call.getTarget() = fcn and
+//fcn.getDeclaringType().getSimpleName() = "map" and
+//fcn.getDeclaringType().getNamespace().getName() = "std" and
+  fcn.hasName("memcpy")
+select call
